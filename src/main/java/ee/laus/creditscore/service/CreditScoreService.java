@@ -24,8 +24,16 @@ public class CreditScoreService {
                 request.loanAmount(),
                 request.loanPeriodInMonths()
         );
-        CreditRequestStatus requestStatus = creditScore >= 1f && !person.isDebt() ?
+        CreditRequestStatus requestStatus = creditScore >= 1f && !person.hasDebt() ?
                 CreditRequestStatus.APPROVE : CreditRequestStatus.DENY;
+        log.info("Credit application status {} with credit modifier: {}, loan amount: {} euros, loan period: {} months," +
+                 " person has debt: {}",
+                requestStatus,
+                person.getCreditModifier(),
+                request.loanAmount(),
+                request.loanPeriodInMonths(),
+                person.hasDebt()
+        );
         if (requestStatus == CreditRequestStatus.APPROVE) {
             return new CreditResponse(CreditRequestStatus.APPROVE);
         }

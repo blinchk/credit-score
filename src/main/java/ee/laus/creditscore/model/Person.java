@@ -2,6 +2,7 @@ package ee.laus.creditscore.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 @Entity
 @Getter
@@ -15,5 +16,6 @@ public class Person {
     @Column(length = 11)
     private String personalCode;
     private Integer creditModifier;
-    private boolean debt;
+    @Accessors(fluent = true)
+    private boolean hasDebt;
 }
